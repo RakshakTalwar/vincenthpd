@@ -1,4 +1,4 @@
-import math, os, time
+import datetime, math, os, time
 import multiprocessing
 import xlrd
 import numpy as np
@@ -18,10 +18,14 @@ def rows_in_xls(xls_file_path):
         #fill up data list
         for row_ctr in range(1, sheet.nrows):
             dirty_row = sheet.row_slice(row_ctr)
-            date_val = xlrd.xldate_as_tuple(dirty_row[0].value,wkbk.datemode)
+
+            date_val = xlrd.xldate_as_tuple(dirty_row[0].value, wkbk.datemode)
+            date_in_proper_tuple = time.strptime(str(date_val), "(%Y, %m, %d, 0, 0, 0)")
+            date_in_sec = time.mktime(date_in_proper_tuple)
+
             clean_row = [item.value for item in dirty_row]
             clean_row.pop(0)
-            clean_row.insert(0, date_val)
+            clean_row.insert(0, date_in_sec)
             all_rows.append(clean_row)
 
         return all_rows
@@ -56,6 +60,93 @@ def multiprocessing_file_reader(file_names, n_cores):
 
     return results_list
 
+class Crime():
+    """crime instance"""
+
+    def __init__(self):
+        self.id = -1
+        self.date_in_sec = -1
+        self.type = ''
+        self.beat = ''
+
+    def update_id(self, p_id):
+        if isinstance(p_id, int):
+            self.id = p_id
+        else:
+            raise TypeError
+
+    def update_date_in_sec(self, p_sec):
+        if isinstance(p_sec, int) or isinstance(p_sec, float):
+            self.date_in_sec = p_sec
+        else:
+            raise TypeError
+
+    def update_type(self, p_type):
+        if isinstance(p_type, int):
+            self.type = p_type
+        else:
+            raise TypeError
+
+    def update_beat(self, p_beat):
+        if isinstance(p_beat, int):
+            self.beat = p_beat
+        else:
+            raise TypeError
+
+class Crime_db():
+    """ stores crime instances """
+
+    def __init__(self):
+        self.crimes = dict()
+
+    def add_crime(self, p_crime):
+        if isinstance(p_crime, Crime):
+            self.crimes.update( { p_crime.id : p_crime } )
+
+class StringToIntMapper():
+    def __init__(self):
+        self.key_to_hash = {};
+        self.hash_to_key = {};
+
+    def get_hash(self, key):
+        if key not in self.key_to_hash:
+            hash = len(self.key_to_hash)
+            self.key_to_hash[key] = hash
+            self.hash_to_key[hash] = key
+        return self.key_to_hash[key]
+
+    def get_key(self, hash):
+        if hash in self.hash_to_key:
+            return self.hash_to_key[hash]
+
+beatMapper = StringToIntMapper()
+typeMapper = StringToIntMapper()
+
+def fill_crime_db(crimes_data, crime_db):
+    """Pass it a list of crime data. Will sort by date and add to crime_db's
+    dict where crime's rank is the id. lower ranks imply earlier events"""
+
+    crimes_list = []
+    for crime_row in crimes_data:
+        tmp_list = [0.0, 0, 0] #in format of: date, beat, type
+        tmp_list[0] = crime_row[0]
+        tmp_list[1] = beatMapper.get_hash(crime_row[3])
+        tmp_list[2] = typeMapper.get_hash(crime_row[2])
+        crimes_list.append(tmp_list)
+
+    crimes_list_tuples = [tuple(l) for l in crimes_list]
+    data_type = [('date', float), ('beat', int), ('type', int)]
+    chrono_array = np.asarray(crimes_list_tuples, dtype=data_type)
+    np.sort(chrono_array, order=['date', 'beat', 'type'])
+    crime_instances = []
+
+    for id_ctr, crime in enumerate(chrono_array):
+        crime_instances.append(Crime())
+        crime_instances[id_ctr].update_id(id_ctr)
+        crime_instances[id_ctr].update_date_in_sec(crime[0])
+        crime_instances[id_ctr].update_beat(crime[1])
+        crime_instances[id_ctr].update_type(crime[2])
+        crime_db.add_crime(crime_instances[id_ctr])
 
 data = [] #stores all crime data
 file_names = [] #stores names of xls filenames within the data/ directory
@@ -67,6 +158,11 @@ x = multiprocessing_file_reader(file_names, 4)
 for row in x:
     data.extend(row)
 
-print data[0]
+cdb = Crime_db() #create the crime database instance
+
+fill_crime_db(data, cdb) #create and add crime instances to the database
+
+for i in range(0,1000,100):
+    print str(cdb.crimes[i].id) + ' ' + str(time.gmtime(cdb.crimes[i].date_in_sec)) + ' ' + str(beatMapper.get_key(cdb.crimes[i].beat)) + ' ' + str(typeMapper.get_key(cdb.crimes[i].type))
 
 print 'time to complete: %ds' % (time.time() - start_time)
