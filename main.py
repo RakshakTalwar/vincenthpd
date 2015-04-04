@@ -1,12 +1,12 @@
 """
-Copyright (c) 2015 Rakshak Talwar 
+Copyright (c) 2015 Rakshak Talwar
 """
 
 import datetime, math, os, time
 import multiprocessing
 import xlrd
 import numpy as np
-from sklearn import linear_model
+from sklearn import cross_validation, linear_model
 
 start_time = time.time()
 
@@ -166,7 +166,19 @@ cdb = Crime_db() #create the crime database instance
 
 fill_crime_db(data, cdb) #create and add crime instances to the database
 
-for i in range(0,1000,100):
-    print str(cdb.crimes[i].id) + ' ' + str(cdb.crimes[i].date_in_sec) + ' ' + str(beatMapper.get_key(cdb.crimes[i].beat)) + ' ' + str(typeMapper.get_key(cdb.crimes[i].type))
+X_data = np.array([], ndmin=2).reshape(-1, 2) #input
+y_data = np.array([]) #output
+
+for crime_key in cdb.crimes:
+    row = np.array([ cdb.crimes[crime_key].date_in_sec, cdb.crimes[crime_key].beat ]) #date, beat
+    X_data = np.vstack((X_data, row))
+
+for i in range(5):
+    print X_data[i]
+
+#skf = cross_validation.StratifiedKFold(y_data, n_folds = 3)
+
+#for i in range(0,1000,100):
+#    print str(cdb.crimes[i].id) + ' ' + str(cdb.crimes[i].date_in_sec) + ' ' + str(beatMapper.get_key(cdb.crimes[i].beat)) + ' ' + str(typeMapper.get_key(cdb.crimes[i].type))
 
 print 'time to complete: %ds' % (time.time() - start_time)
