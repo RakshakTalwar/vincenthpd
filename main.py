@@ -6,7 +6,8 @@ import datetime, math, os, time
 import multiprocessing
 import xlrd
 import numpy as np
-from sklearn import cross_validation, linear_model
+from sklearn import cross_validation
+from sklearn.neighbors import KNeighborsClassifier
 
 start_time = time.time()
 
@@ -170,19 +171,21 @@ X_data = np.array([], ndmin=2).reshape(-1, 2) #input
 y_data = np.array([], ndmin=1).reshape(-1, 1) #output
 
 for crime_key in sorted(cdb.crimes):
-    X_row = np.array([ cdb.crimes[crime_key].date_in_sec, cdb.crimes[crime_key].beat ]) #date, beat
+    norm_date_in_sec = cdb.crimes[crime_key].date_in_sec - cdb.crimes[0].date_in_sec #normalized date
+    X_row = np.array([ norm_date_in_sec, cdb.crimes[crime_key].beat ]) #date, beat
     X_data = np.vstack((X_data, X_row))
     y_point = np.array(cdb.crimes[crime_key].type).reshape(-1, 1)
     y_data = np.concatenate((y_data, y_point))
 y_data = np.ravel(y_data)
 
-skf = cross_validation.StratifiedKFold(y_data, n_folds = 10) #create cross validation model
+scores = []
+skf = cross_validation.StratifiedKFold(y_data, n_folds = 3) #create cross validation model
 for train_index, test_index in skf:
     X_train, X_test = X_data[train_index], X_data[test_index]
     y_train, y_test = y_data[train_index], y_data[test_index]
-
-clf = linear_model.SGDClassifier(loss='hinge', penalty='l2')
-clf.fit(X_train, y_train)
-print clf.score(X_train, y_train)
+    neigh = KNeighborsClassifier(n_neighbors=5)
+    neigh.fit(X_train, y_train)
+    scores.append(neigh.score(X_test, y_test))
+print("Mean(scores) = %.5f" % (np.mean(scores)))
 
 print 'time to complete: %ds' % (time.time() - start_time)
