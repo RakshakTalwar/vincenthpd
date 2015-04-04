@@ -167,18 +167,22 @@ cdb = Crime_db() #create the crime database instance
 fill_crime_db(data, cdb) #create and add crime instances to the database
 
 X_data = np.array([], ndmin=2).reshape(-1, 2) #input
-y_data = np.array([]) #output
+y_data = np.array([], ndmin=1).reshape(-1, 1) #output
 
-for crime_key in cdb.crimes:
-    row = np.array([ cdb.crimes[crime_key].date_in_sec, cdb.crimes[crime_key].beat ]) #date, beat
-    X_data = np.vstack((X_data, row))
+for crime_key in sorted(cdb.crimes):
+    X_row = np.array([ cdb.crimes[crime_key].date_in_sec, cdb.crimes[crime_key].beat ]) #date, beat
+    X_data = np.vstack((X_data, X_row))
+    y_point = np.array(cdb.crimes[crime_key].type).reshape(-1, 1)
+    y_data = np.concatenate((y_data, y_point))
+y_data = np.ravel(y_data)
 
-for i in range(5):
-    print X_data[i]
+skf = cross_validation.StratifiedKFold(y_data, n_folds = 10) #create cross validation model
+for train_index, test_index in skf:
+    X_train, X_test = X_data[train_index], X_data[test_index]
+    y_train, y_test = y_data[train_index], y_data[test_index]
 
-#skf = cross_validation.StratifiedKFold(y_data, n_folds = 3)
-
-#for i in range(0,1000,100):
-#    print str(cdb.crimes[i].id) + ' ' + str(cdb.crimes[i].date_in_sec) + ' ' + str(beatMapper.get_key(cdb.crimes[i].beat)) + ' ' + str(typeMapper.get_key(cdb.crimes[i].type))
+clf = linear_model.SGDClassifier(loss='hinge', penalty='l2')
+clf.fit(X_train, y_train)
+print clf.score(X_train, y_train)
 
 print 'time to complete: %ds' % (time.time() - start_time)
