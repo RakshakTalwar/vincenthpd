@@ -1,3 +1,7 @@
+"""
+Copyright (c) 2015 Rakshak Talwar 
+"""
+
 import datetime, math, os, time
 import multiprocessing
 import xlrd
