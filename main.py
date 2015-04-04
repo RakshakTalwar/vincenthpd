@@ -6,6 +6,7 @@ import datetime, math, os, time
 import multiprocessing
 import xlrd
 import numpy as np
+import json
 from sklearn import cross_validation
 from sklearn.neighbors import KNeighborsClassifier
 
@@ -170,8 +171,9 @@ fill_crime_db(data, cdb) #create and add crime instances to the database
 X_data = np.array([], ndmin=2).reshape(-1, 2) #input
 y_data = np.array([], ndmin=1).reshape(-1, 1) #output
 
+base_time = cdb.crimes[0].date_in_sec
 for crime_key in sorted(cdb.crimes):
-    norm_date_in_sec = cdb.crimes[crime_key].date_in_sec - cdb.crimes[0].date_in_sec #normalized date
+    norm_date_in_sec = cdb.crimes[crime_key].date_in_sec - base_time #normalized date
     X_row = np.array([ norm_date_in_sec, cdb.crimes[crime_key].beat ]) #date, beat
     X_data = np.vstack((X_data, X_row))
     y_point = np.array(cdb.crimes[crime_key].type).reshape(-1, 1)
@@ -180,12 +182,39 @@ y_data = np.ravel(y_data)
 
 scores = []
 skf = cross_validation.StratifiedKFold(y_data, n_folds = 3) #create cross validation model
+neigh = KNeighborsClassifier(n_neighbors=5) #create KNN model
 for train_index, test_index in skf:
     X_train, X_test = X_data[train_index], X_data[test_index]
     y_train, y_test = y_data[train_index], y_data[test_index]
-    neigh = KNeighborsClassifier(n_neighbors=5)
     neigh.fit(X_train, y_train)
     scores.append(neigh.score(X_test, y_test))
 print("Mean(scores) = %.5f" % (np.mean(scores)))
+
+#account for base time
+#reverse hash lookup
+
+#predictions for the next week
+
+#find the current epoch time
+times = [] #stores the normalized time in seconds of each day for the following days
+for i in range(7):
+    times.append((time.time() + i*86400) - base_time)
+
+#create a dictionary to store future crimes
+fut_week_crimes = dict()
+
+fut_week_crimes_list = []
+for time_i in times:
+    for beat_id in beatMapper.hash_to_key:
+        temp_dict = {
+            'date' : time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time_i+base_time)),
+            'beat': beatMapper.get_key(beat_id),
+            'type': typeMapper.get_key(neigh.predict([time_i, beat_id])[0])
+            }
+
+        fut_week_crimes_list.append(temp_dict)
+fut_week_crimes["crimes"] = fut_week_crimes_list
+with open('future.json', 'w') as fl:
+    json.dump(fut_week_crimes, fl)
 
 print 'time to complete: %ds' % (time.time() - start_time)
