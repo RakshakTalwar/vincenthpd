@@ -154,7 +154,7 @@ for root, dirs, filenames in os.walk(data_dir): #iterate over files
     for f in filenames:
         file_names.append(f)
 
-x = multiprocessing_file_reader(file_names, 4)
+x = multiprocessing_file_reader(file_names, 8)
 for row in x:
     data.extend(row)
 
@@ -163,6 +163,6 @@ cdb = Crime_db() #create the crime database instance
 fill_crime_db(data, cdb) #create and add crime instances to the database
 
 for i in range(0,1000,100):
-    print str(cdb.crimes[i].id) + ' ' + str(time.gmtime(cdb.crimes[i].date_in_sec)) + ' ' + str(beatMapper.get_key(cdb.crimes[i].beat)) + ' ' + str(typeMapper.get_key(cdb.crimes[i].type))
+    print str(cdb.crimes[i].id) + ' ' + str(cdb.crimes[i].date_in_sec) + ' ' + str(beatMapper.get_key(cdb.crimes[i].beat)) + ' ' + str(typeMapper.get_key(cdb.crimes[i].type))
 
 print 'time to complete: %ds' % (time.time() - start_time)
