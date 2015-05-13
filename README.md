@@ -14,3 +14,5 @@
 * Run main.py
 * Results are stored in future.json
 * Convert future.json into a .csv file through an online tool such as http://konklone.io/json/
+
+To start server `cd` into directory and put `python -m SimpleHTTPServer 8000`
