@@ -49,19 +49,24 @@ y_data = np.ravel(split_major_array[3])
 
 error_rates = []
 variance_rates = []
-kf = KFold(len(y_data), n_folds = 3, shuffle=False) #create cross validation model
-#neigh = KNeighborsRegressor(n_neighbors=5) #create KNN model
+kf = KFold(len(y_data), n_folds = 100, shuffle=False) #create cross validation model
 clf = SGDClassifier(loss="hinge", penalty="l2")
+ctr = 0
 for train_index, test_index in kf:
     X_train, X_test = X_data[train_index], X_data[test_index]
     y_train, y_test = y_data[train_index], y_data[test_index]
-    #neigh.fit(X_train, y_train)
     clf.fit(X_train, y_train)
     predicted = clf.predict(X_test)
     error = mean_squared_error(y_test, predicted)
     error_rates.append(error)
     variance = explained_variance_score(y_test, predicted)
     variance_rates.append(variance)
+    if ctr == 0:
+        plt.plot(X_test.transpose()[0], predicted, 'b')
+        plt.plot(X_test.transpose()[0], y_test-1, 'r')
+        plt.axis([2.5e9, 3e9, 0, 2])
+        plt.show()
+        ctr += 1
 
 print("Mean(error_rates) = %.5f" % (np.mean(error_rates)))
 print("Mean(variance_rates) = %.5f" % (np.mean(variance_rates)))
