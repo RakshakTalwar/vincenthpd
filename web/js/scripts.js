@@ -91,7 +91,7 @@ $(document).ready(function() { /* google maps ----*/
             var fill = feature.getProperty('fill');
             var stroke = feature.getProperty('stroke');
             return {
-                fillColor: fill,
+                fillColor: '#FF0000',
                 strokeColor: stroke
             };
         });

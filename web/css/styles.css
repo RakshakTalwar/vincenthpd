@@ -56,16 +56,6 @@ body {
     height: 100%;
 }
 
-#map-canvas {
-    width: 50%;
-    height: calc(100% - 0);
-    position: absolute;
-    right: 16px;
-    top: 50px;
-    bottom: 0;
-    overflow: hidden;
-}
-
 .controls {
     margin-top: 16px;
     border: 1px solid transparent;
@@ -106,4 +96,47 @@ body {
     font-family: Roboto;
     font-size: 13px;
     font-weight: 300;
+}
+
+#map-canvas {
+    width:100%;
+    height:calc(100% - 0);
+    position:absolute;
+    right:0px;
+    top:50px;
+    bottom:0;
+    height: 62%;
+    overflow:hidden;
+}
+
+.tableDiv {
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    padding-right: 30px;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    #map-canvas {
+        /*width:100%;*/
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    #map-canvas {
+        width:50%;
+        height: 100%;
+    }
+    .tableDiv {
+        bottom: auto;
+        position: relative;
+        width: 50%;
+    }
 }
