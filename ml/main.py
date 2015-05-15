@@ -5,8 +5,11 @@ Copyright (c) 2015 Rakshak Talwar
 import datetime, math, os, time
 import numpy as np
 import json, sqlite3
-from sklearn.cross_validation import StratifiedKFold
+from sklearn.cross_validation import KFold
+from sklearn.metrics import mean_squared_error, explained_variance_score
 from sklearn.neighbors import KNeighborsRegressor
+from sklearn.linear_model import SGDClassifier
+import matplotlib.pyplot as plt
 import vincent
 start_time = time.time()
 
@@ -31,8 +34,8 @@ for ctr, crime in enumerate(db_cur.fetchall()):
     #add the time with respect to base_time
     temp_list.append(crime[0] - base_time)
     #convert the OffenseTypes and Beats to hashes
-    temp_list.append(type_mapper.get_hash(crime[1]))
-    temp_list.append(beat_mapper.get_hash(crime[2]))
+    temp_list.append(type_mapper.get_hash(crime[1]) * 1e2)
+    temp_list.append(beat_mapper.get_hash(crime[2]) * 1e2)
     #add the number of offenses
     temp_list.append(crime[3])
     #append this temporary list to the main list which stores all the data
@@ -44,15 +47,24 @@ split_major_array = np.hsplit(major_array, 4)
 X_data = np.hstack((split_major_array[0], split_major_array[1], split_major_array[2]))
 y_data = np.ravel(split_major_array[3])
 
-scores = []
-skf = StratifiedKFold(y_data, n_folds = 3, shuffle=False) #create cross validation model
-neigh = KNeighborsRegressor(n_neighbors=5) #create KNN model
-for train_index, test_index in skf:
+error_rates = []
+variance_rates = []
+kf = KFold(len(y_data), n_folds = 3, shuffle=False) #create cross validation model
+#neigh = KNeighborsRegressor(n_neighbors=5) #create KNN model
+clf = SGDClassifier(loss="hinge", penalty="l2")
+for train_index, test_index in kf:
     X_train, X_test = X_data[train_index], X_data[test_index]
     y_train, y_test = y_data[train_index], y_data[test_index]
-    neigh.fit(X_train, y_train)
-    scores.append(neigh.score(X_test, y_test))
-print("Mean(scores) = %.5f" % (np.mean(scores)))
+    #neigh.fit(X_train, y_train)
+    clf.fit(X_train, y_train)
+    predicted = clf.predict(X_test)
+    error = mean_squared_error(y_test, predicted)
+    error_rates.append(error)
+    variance = explained_variance_score(y_test, predicted)
+    variance_rates.append(variance)
+
+print("Mean(error_rates) = %.5f" % (np.mean(error_rates)))
+print("Mean(variance_rates) = %.5f" % (np.mean(variance_rates)))
 
 """
 #account for base time
