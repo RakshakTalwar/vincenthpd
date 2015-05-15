@@ -89,4 +89,4 @@ class ParseKMLtoGeoJSON:
         self.polygon.append(self.polygon[0])
 
 if "__main__" == __name__:
-    UpdateGeoJSONwithKML("../beats.geojson", "./")
+    UpdateGeoJSONwithKML("../js/beats.geojson", "./")
