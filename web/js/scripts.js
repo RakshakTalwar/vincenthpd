@@ -5,6 +5,9 @@ $(document).ready(function() { /* google maps ----*/
 
     var data, beatDisplay = $("#beat-name"),
         displayTarget = $("#display-table");
+    var murderRow = $("#murder-cases");
+    var assaultRow = $("#assault-cases");
+    var rapeRow = $("#rape-cases");
 
     $.getJSON("js/future.json", function(d) {
         data = d;
@@ -14,15 +17,19 @@ $(document).ready(function() { /* google maps ----*/
         beatDisplay.html(beatName)
         if (data != null) {
             if (beatName in data) {
-                var index, len, arr = data[beatName];
-                var murderRow = $("#murder-cases");
-                var assaultRow = $("#assault-cases");
-                var rapeRow = $("#rape-cases");
-                for (i = 0, len = arr.length; i < len; ++i) {
+                var i, arr = data[beatName];
+                for (i = 0; i < 7; ++i) {
                     var day = ".day-" + i.toString()
                     murderRow.children(day).html(arr[i]["murder"].toString() + " cases")
                     assaultRow.children(day).html(arr[i]["assault"].toString() + " cases")
                     rapeRow.children(day).html(arr[i]["rape"].toString() + " cases")
+                }
+            } else {
+                for (i = 0; i < 7; ++i) {
+                    var day = ".day-" + i.toString()
+                    murderRow.children(day).html("")
+                    assaultRow.children(day).html("")
+                    rapeRow.children(day).html("")
                 }
             }
         }
