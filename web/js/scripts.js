@@ -2,6 +2,13 @@ $(document).ready(function() { /* google maps ----*/
 
     // Set global Variables
     var map, markers = [];
+
+    var data, beatDisplay = $("#beat-name"),
+        displayTarget = $("#display-table");
+    var displayBeatData = function(event) {
+        beatDisplay.html(event.feature.A.name)
+    }
+
     var initialize = function() {
 
         var houstonLocation = new google.maps.LatLng(29.757150, -95.363903);
@@ -88,9 +95,7 @@ $(document).ready(function() { /* google maps ----*/
                 strokeColor: stroke
             };
         });
-        map.data.addListener('click', function(event) {
-            console.log(event);
-        });
+        map.data.addListener('click', displayBeatData);
 
 
 

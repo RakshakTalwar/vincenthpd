@@ -55,17 +55,50 @@
     <div class="container-fluid" id="main">
         <div class="row">
             <div class="col-xs-6" id="left">
-                <h2>Bootstrap Google Maps Demo</h2>
+                <h2>Beat: <span id="beat-name"></span></h2>
                 <!-- item list -->
-                <div class="panel panel-default">
-                    <div class="panel-heading"><a href="">Item heading</a></div>
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</p>
-                <hr>
-                <!-- /item list -->
-                <p>
-                    <a href="http://www.bootply.com/render/129229">Demo</a> | <a href="http://bootply.com/129229">Source Code</a>
-                </p>
+                <table class="table table-hover" id="display-table">
+                    <thead id="prediction-heading">
+                        <th>Crime</th>
+                        <th class="day-0">Sat</th>
+                        <th class="day-1">Sun</th>
+                        <th class="day-2">Mon</th>
+                        <th class="day-3">Tue</th>
+                        <th class="day-4">Wed</th>
+                        <th class="day-5">Thu</th>
+                        <th class="day-6">Fri</th>
+                    </thead>
+                    <tr id="murder-cases">
+                        <th>Murder</th>
+                        <tr class="day-0"></tr>
+                        <tr class="day-1"></tr>
+                        <tr class="day-2"></tr>
+                        <tr class="day-3"></tr>
+                        <tr class="day-4"></tr>
+                        <tr class="day-5"></tr>
+                        <tr class="day-6"></tr>
+                    </tr>
+                    <tr id="assault-cases">
+                        <th>Assault</th>
+                        <tr class="day-0"></tr>
+                        <tr class="day-1"></tr>
+                        <tr class="day-2"></tr>
+                        <tr class="day-3"></tr>
+                        <tr class="day-4"></tr>
+                        <tr class="day-5"></tr>
+                        <tr class="day-6"></tr>
+                    </tr>
+                    <tr id="rape-cases">
+                        <th>Rape</th>
+                        <tr class="day-0"></tr>
+                        <tr class="day-1"></tr>
+                        <tr class="day-2"></tr>
+                        <tr class="day-3"></tr>
+                        <tr class="day-4"></tr>
+                        <tr class="day-5"></tr>
+                        <tr class="day-6"></tr>
+                    </tr>
+                </table>
                 <hr>
             </div>
             <div class="col-xs-6">
