@@ -111,23 +111,23 @@ body {
     bottom: 0;
     height: 62%;
     overflow: hidden;
-  }
+}
 
-  .tableDiv {
+.tableDiv {
     bottom: 0;
     position: absolute;
     width: 100%;
     padding-right: 30px;
     pointer-events: none;
-  }
+}
 
-  .tableBtn-lg {
+.tableBtn-lg {
     padding: 18px 0;
     width: 60px;
-  }
+}
 
 
-  .tableBtn {
+.tableBtn {
     background-color: #e0e0e0;
     border-radius: 50%;
     color: #212121;
@@ -145,32 +145,40 @@ body {
     margin-bottom: 8px;
     text-decoration: none !important;
     pointer-events: all;
-  }
+}
 
-  a.tableBtn:hover {
+a.tableBtn:hover {
     color: #212121;
     -webkit-box-shadow: 0 3px 10px rgba(0,0,0,.5),0 3px 15px rgba(0,0,0,.5);
     box-shadow: 0 3px 10px rgba(0,0,0,.5),0 3px 15px rgba(0,0,0,.5);
-  }
-  .tableBtn-red {
+}
+.tableBtn-red {
     background-color: #f44336;
     color: #fff !important;
-  }
+}
 
-  .fa-plus {
+.fa-plus {
     display: none;
-  }
+}
 
-  .collapsed> .fa-plus {
+.collapsed> .fa-plus {
     display: block;
-  }
-  .collapsed> .fa-times {
+}
+.collapsed> .fa-times {
     display: none;
-  }
-  .collapse {
-    display:block;
-    height:auto;
-  }
+}
+
+.header-close {
+  position: absolute;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -webkit-transform: rotate(-225deg);
+  -ms-transform: rotate(-225deg);
+  transform: rotate(-225deg);
+}
+#collapseExample {
+  pointer-events: all;
+}
 /*
    SCREEN SIZE SECTION
    ========================================================================== */
@@ -179,31 +187,30 @@ body {
    @media (min-width: 768px) {
     #map-canvas {
       /*width:100%;*/
-    }
-    .collapseTable {
-      display: block;
-    }
   }
-  /* Medium devices (desktops, 992px and up) */
+  .collapseTable {
+      /*display: block;*/
+  }
+}
+/* Medium devices (desktops, 992px and up) */
 
-  @media (min-width: 992px) {}
-  /* Large devices (large desktops, 1200px and up) */
-
-  @media (min-width: 1200px) {
+@media (min-width: 992px) {
     #map-canvas {
       width: 100%;
       height: 100%;
-    }
-    .tableDiv {
+  }
+  .tableDiv {
       left: 0px;
       bottom: 0px;
       position: absolute;
       width: 60%;
-    }
-    .tableBtn {
-      display: block;
-    }
-    .collapse {
-      height:0px;
-    }
   }
+  .tableBtn {
+      display: block;
+  }
+}
+/* Large devices (large desktops, 1200px and up) */
+
+@media (min-width: 1200px) {
+
+}
