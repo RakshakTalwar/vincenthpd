@@ -12,6 +12,16 @@ $(document).ready(function() { /* google maps ----*/
     $.getJSON("js/future.json", function(d) {
         data = d;
     })
+
+    var caseInt2Text = function(cases) {
+        if (cases < 1)
+            return "0"
+        else if (cases = 1)
+            return "1 Case"
+        else
+            return cases.toString + " Cases"
+    }
+
     var displayBeatData = function(event) {
         var beatName = event.feature.A.name.toUpperCase()
         beatDisplay.html(beatName)
@@ -20,9 +30,9 @@ $(document).ready(function() { /* google maps ----*/
                 var i, arr = data[beatName];
                 for (i = 0; i < 7; ++i) {
                     var day = ".day-" + i.toString()
-                    murderRow.children(day).html(arr[i]["murder"].toString() + " cases")
-                    assaultRow.children(day).html(arr[i]["assault"].toString() + " cases")
-                    rapeRow.children(day).html(arr[i]["rape"].toString() + " cases")
+                    murderRow.children(day).html(caseInt2Text(arr[i]["murder"]))
+                    assaultRow.children(day).html(caseInt2Text(arr[i]["assault"]))
+                    rapeRow.children(day).html(caseInt2Text(arr[i]["rape"]))
                 }
             } else {
                 for (i = 0; i < 7; ++i) {
