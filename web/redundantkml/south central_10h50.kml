@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>south central_10h50.kml</name>
+	<Style id="s_ylw-pushpin">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<StyleMap id="m_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin_hl</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="s_ylw-pushpin_hl">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Placemark>
+		<name>south central_10h50</name>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<LineString>
+			<tessellate>1</tessellate>
+			<coordinates>
+				-95.36195964325924,29.74446151705322,0 -95.36832644317217,29.73604960670067,0 -95.37113776093624,29.73314453890528,0 -95.37214444528759,29.73137086171173,0 -95.36359790682873,29.72729130383762,0 -95.35697074191545,29.72472946342997,0 -95.3523501135324,29.72372175692929,0 -95.35269248392628,29.72099022580239,0 -95.34886923703856,29.71844605765029,0 -95.34426289737358,29.71761175371433,0 -95.34096734852423,29.71643183053342,0 -95.33630504370798,29.71549836511317,0 -95.33421444440992,29.71573395657178,0 -95.3377066296363,29.72717577689459,0 -95.33846962251903,29.72900513844709,0 -95.34327811874741,29.73275098840866,0 -95.34748768677092,29.73508463173946,0 -95.35158017347077,29.73817601553231,0 -95.35701111981029,29.74120485079542,0 -95.36012326184347,29.74386337472505,0 -95.36276009358211,29.7434147241526,0 
+			</coordinates>
+		</LineString>
+	</Placemark>
+</Document>
+</kml>

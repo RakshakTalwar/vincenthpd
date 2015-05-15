@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>south central_10h20.kml</name>
+	<Style id="s_ylw-pushpin">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<StyleMap id="m_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin_hl</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="s_ylw-pushpin_hl">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Placemark>
+		<name>south central_10h20</name>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<LineString>
+			<tessellate>1</tessellate>
+			<coordinates>
+				-95.34098532964929,29.74838613368944,0 -95.34331071972409,29.74396201230038,0 -95.34438617292837,29.74202785382045,0 -95.34253551013498,29.74083047964495,0 -95.34214593999749,29.73999626299191,0 -95.3430911621813,29.73716262317015,0 -95.34389253427915,29.73425609619312,0 -95.34093426117204,29.73150982873109,0 -95.33344326797852,29.7275775721677,0 -95.32785436862801,29.7242723173739,0 -95.32405241695396,29.72220956311581,0 -95.32122895872232,29.72482058037679,0 -95.31996081439571,29.7265825646847,0 -95.32190631125646,29.72802627372357,0 -95.3198359571098,29.73197210485666,0 -95.31526036582467,29.73728999530524,0 -95.31369526766235,29.73870268505447,0 -95.32038941609999,29.74107819114403,0 -95.32705801181604,29.74299990983139,0 -95.32862489799136,29.74372554794702,0 -95.33405512370526,29.74518432023154,0 -95.34098532964929,29.74838613368944,0 
+			</coordinates>
+		</LineString>
+	</Placemark>
+</Document>
+</kml>

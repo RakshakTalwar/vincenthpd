@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>hobby airport_23J40.kml</name>
+	<Style id="s_ylw-pushpin">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<StyleMap id="m_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin_hl</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="s_ylw-pushpin_hl">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Placemark>
+		<name>hobby airport_23J40</name>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<LineString>
+			<tessellate>1</tessellate>
+			<coordinates>
+				-95.16950760567693,29.62091252941085,0 -95.17384730351459,29.6226822538372,0 -95.17230431334998,29.61993187902084,0 -95.17297894493059,29.61534991123036,0 -95.17343301874824,29.6100580989173,0 -95.17698673775152,29.60952049318523,0 -95.17894663269973,29.60951942916178,0 -95.17798135726157,29.6075852276039,0 -95.17802306741139,29.6041507828264,0 -95.17600882128212,29.60082437341769,0 -95.17117355790091,29.59602149876961,0 -95.16719224307282,29.59248044613839,0 -95.16459612664808,29.59082921162138,0 -95.16296229811832,29.59083090883063,0 -95.16116505379522,29.59083248512615,0 -95.15806049397891,29.59083522289838,0 -95.15300630520848,29.59069072809494,0 -95.15284514182881,29.59479377184313,0 -95.15256830158459,29.60267155736408,0 -95.15204964445608,29.60486192190337,0 -95.14636299419074,29.60921163715395,0 -95.14221353963167,29.61263271637043,0 -95.13962565496377,29.61447159304773,0 -95.14204979472396,29.61709369774246,0 -95.15097269385123,29.61389521609372,0 -95.15284187690483,29.61316264837521,0 -95.15351881827563,29.61918344912341,0 -95.15679261575218,29.62053936078356,0 -95.16239091887059,29.62092387968293,0 -95.16290391730425,29.62270076247088,0 -95.16592322413327,29.62269595633685,0 -95.16670539453571,29.62033067151596,0 -95.16950760567693,29.62091252941085,0 
+			</coordinates>
+		</LineString>
+	</Placemark>
+</Document>
+</kml>

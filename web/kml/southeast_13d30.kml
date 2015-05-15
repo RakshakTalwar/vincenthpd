@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>southeast_13d30.kml</name>
+	<Style id="s_ylw-pushpin">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<StyleMap id="m_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin_hl</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="s_ylw-pushpin_hl">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Placemark>
+		<name>southeast_13d30</name>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<LineString>
+			<tessellate>1</tessellate>
+			<coordinates>
+				-95.30647320616497,29.62736069464377,0 -95.31119481129642,29.64240150660363,0 -95.31225243864644,29.64610948473373,0 -95.30058615886065,29.64991063395217,0 -95.29410351938292,29.65321380670928,0 -95.28888367709214,29.65595222414848,0 -95.28865474258099,29.6530885857517,0 -95.28888915647218,29.64441794433179,0 -95.2890224114179,29.63793912680836,0 -95.28742784801224,29.63533959544468,0 -95.28688381698176,29.63380433154476,0 -95.28557432059323,29.62987395393628,0 -95.28607390496182,29.62586425882453,0 -95.29163684933008,29.62779433947266,0 -95.29721283893056,29.62914200581454,0 -95.30057428950978,29.62846957453642,0 -95.30605335613741,29.62608978039253,0 -95.30626787492098,29.62629830189606,0 -95.30647320616497,29.62736069464377,0 
+			</coordinates>
+		</LineString>
+	</Placemark>
+</Document>
+</kml>
