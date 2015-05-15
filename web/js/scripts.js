@@ -3,11 +3,11 @@ $(document).ready(function() { /* google maps ----*/
     // Set global Variables
     var map, markers = [];
 
-    var data, beatDisplay = $("#beat-name"),
-        displayTarget = $("#display-table");
-    var murderRow = $("#murder-cases");
-    var assaultRow = $("#assault-cases");
-    var rapeRow = $("#rape-cases");
+    var data, beatDisplay = $(".beat-name"),
+        displayTarget = $(".display-table");
+    var murderRow = $(".murder-cases");
+    var assaultRow = $(".assault-cases");
+    var rapeRow = $(".rape-cases");
 
     $.getJSON("js/future.json", function(d) {
         data = d;
@@ -122,35 +122,35 @@ $(document).ready(function() { /* google maps ----*/
 
 
 
-map.data.loadGeoJson('js/beats.geojson');
-map.data.setStyle(function(feature) {
-    var fill = feature.getProperty('fill');
-    var stroke = feature.getProperty('stroke');
-    return {
-        fillColor: '#FF0000',
-        strokeColor: stroke
+        map.data.loadGeoJson('js/beats.geojson');
+        map.data.setStyle(function(feature) {
+            var fill = feature.getProperty('fill');
+            var stroke = feature.getProperty('stroke');
+            return {
+                fillColor: '#FF0000',
+                strokeColor: stroke
+            };
+        });
+        map.data.addListener('click', displayBeatData);
+
+
+
+        map.data.addListener('mouseover', function(event) {
+            map.data.overrideStyle(event.feature, {
+                strokeWeight: 2.0,
+                fillColor: 'green'
+            });
+        });
+
+        map.data.addListener('mouseout', function(event) {
+            map.data.overrideStyle(event.feature, {
+                fillColor: '#FF0000'
+            });
+        });
+
+
+
     };
-});
-map.data.addListener('click', displayBeatData);
-
-
-
-map.data.addListener('mouseover', function(event) {
-    map.data.overrideStyle(event.feature, {
-        strokeWeight: 2.0,
-        fillColor: 'green'
-    });
-});
-
-map.data.addListener('mouseout', function(event) {
-    map.data.overrideStyle(event.feature, {
-        fillColor: '#FF0000'
-    });
-});
-
-
-
-};
 
     ///* Setup InfoWindow */
     var InfoWindow = function(content) {
@@ -177,15 +177,12 @@ map.data.addListener('mouseout', function(event) {
      * Show button
      */
 
-     $('#faBtn').click(function () {
+    $('#faBtn').click(function() {
         console.log('moreclicked');
-        if($('#faBtn').hasClass('fa-plus'))
-        {
+        if ($('#faBtn').hasClass('fa-plus')) {
             $('#faBtn').html('<i class="fa fa-times"></i>');
-        }
-        else
-        {
+        } else {
             $('#faBtn').html('<i class="fa fa-plus"></i>');
         }
     });
- }); /* end google maps -----------------------*/
+}); /* end google maps -----------------------*/
