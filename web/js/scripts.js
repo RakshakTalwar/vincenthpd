@@ -4,9 +4,45 @@ $(document).ready(function() { /* google maps ----*/
     var map, markers = [];
 
     var data, beatDisplay = $("#beat-name"),
-    displayTarget = $("#display-table");
+        displayTarget = $("#display-table");
+    var murderRow = $("#murder-cases");
+    var assaultRow = $("#assault-cases");
+    var rapeRow = $("#rape-cases");
+
+    $.getJSON("js/future.json", function(d) {
+        data = d;
+    })
+
+    var caseInt2Text = function(cases) {
+        if (cases < 1)
+            return "0"
+        else if (cases = 1)
+            return "1 Case"
+        else
+            return cases.toString + " Cases"
+    }
+
     var displayBeatData = function(event) {
-        beatDisplay.html(event.feature.A.name.toUpperCase())
+        var beatName = event.feature.A.name.toUpperCase()
+        beatDisplay.html(beatName)
+        if (data != null) {
+            if (beatName in data) {
+                var i, arr = data[beatName];
+                for (i = 0; i < 7; ++i) {
+                    var day = ".day-" + i.toString()
+                    murderRow.children(day).html(caseInt2Text(arr[i]["murder"]))
+                    assaultRow.children(day).html(caseInt2Text(arr[i]["assault"]))
+                    rapeRow.children(day).html(caseInt2Text(arr[i]["rape"]))
+                }
+            } else {
+                for (i = 0; i < 7; ++i) {
+                    var day = ".day-" + i.toString()
+                    murderRow.children(day).html("")
+                    assaultRow.children(day).html("")
+                    rapeRow.children(day).html("")
+                }
+            }
+        }
     }
 
     var initialize = function() {
