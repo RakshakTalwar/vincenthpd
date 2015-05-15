@@ -44,11 +44,8 @@ split_major_array = np.hsplit(major_array, 4)
 X_data = np.hstack((split_major_array[0], split_major_array[1], split_major_array[2]))
 y_data = np.ravel(split_major_array[3])
 
-print type(y_data)
-
-"""
 scores = []
-skf = StratifiedKFold(y_data, n_folds = 3) #create cross validation model
+skf = StratifiedKFold(y_data, n_folds = 3, shuffle=False) #create cross validation model
 neigh = KNeighborsRegressor(n_neighbors=5) #create KNN model
 for train_index, test_index in skf:
     X_train, X_test = X_data[train_index], X_data[test_index]
@@ -57,6 +54,7 @@ for train_index, test_index in skf:
     scores.append(neigh.score(X_test, y_test))
 print("Mean(scores) = %.5f" % (np.mean(scores)))
 
+"""
 #account for base time
 #reverse hash lookup
 
