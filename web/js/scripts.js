@@ -5,8 +5,27 @@ $(document).ready(function() { /* google maps ----*/
 
     var data, beatDisplay = $("#beat-name"),
         displayTarget = $("#display-table");
+
+    $.getJSON("js/future.json", function(d) {
+        data = d;
+    })
     var displayBeatData = function(event) {
-        beatDisplay.html(event.feature.A.name.toUpperCase())
+        var beatName = event.feature.A.name.toUpperCase()
+        beatDisplay.html(beatName)
+        if (data != null) {
+            if (beatName in data) {
+                var index, len, arr = data[beatName];
+                var murderRow = $("#murder-cases");
+                var assaultRow = $("#assault-cases");
+                var rapeRow = $("#rape-cases");
+                for (i = 0, len = arr.length; i < len; ++i) {
+                    var day = ".day-" + i.toString()
+                    murderRow.children(day).html(arr[i]["murder"].toString() + " cases")
+                    assaultRow.children(day).html(arr[i]["assault"].toString() + " cases")
+                    rapeRow.children(day).html(arr[i]["rape"].toString() + " cases")
+                }
+            }
+        }
     }
 
     var initialize = function() {
