@@ -4,7 +4,7 @@ $(document).ready(function() { /* google maps ----*/
     var map, markers = [];
 
     var data, beatDisplay = $("#beat-name"),
-        displayTarget = $("#display-table");
+    displayTarget = $("#display-table");
     var displayBeatData = function(event) {
         beatDisplay.html(event.feature.A.name.toUpperCase())
     }
@@ -86,35 +86,35 @@ $(document).ready(function() { /* google maps ----*/
 
 
 
-        map.data.loadGeoJson('js/beats.geojson');
-        map.data.setStyle(function(feature) {
-            var fill = feature.getProperty('fill');
-            var stroke = feature.getProperty('stroke');
-            return {
-                fillColor: '#FF0000',
-                strokeColor: stroke
-            };
-        });
-        map.data.addListener('click', displayBeatData);
-
-
-
-        map.data.addListener('mouseover', function(event) {
-            map.data.overrideStyle(event.feature, {
-                strokeWeight: 2.0,
-                fillColor: 'green'
-            });
-        });
-
-        map.data.addListener('mouseout', function(event) {
-            map.data.overrideStyle(event.feature, {
-                fillColor: '#FF0000'
-            });
-        });
-
-
-
+map.data.loadGeoJson('js/beats.geojson');
+map.data.setStyle(function(feature) {
+    var fill = feature.getProperty('fill');
+    var stroke = feature.getProperty('stroke');
+    return {
+        fillColor: '#FF0000',
+        strokeColor: stroke
     };
+});
+map.data.addListener('click', displayBeatData);
+
+
+
+map.data.addListener('mouseover', function(event) {
+    map.data.overrideStyle(event.feature, {
+        strokeWeight: 2.0,
+        fillColor: 'green'
+    });
+});
+
+map.data.addListener('mouseout', function(event) {
+    map.data.overrideStyle(event.feature, {
+        fillColor: '#FF0000'
+    });
+});
+
+
+
+};
 
     ///* Setup InfoWindow */
     var InfoWindow = function(content) {
@@ -136,4 +136,20 @@ $(document).ready(function() { /* google maps ----*/
     /* Wait till initialize() finishes */
     google.maps.event.addDomListener(window, 'load', initialize);
 
-}); /* end google maps -----------------------*/
+
+    /**
+     * Show button
+     */
+
+     $('#faBtn').click(function () {
+        console.log('moreclicked');
+        if($('#faBtn').hasClass('fa-plus'))
+        {
+            $('#faBtn').html('<i class="fa fa-times"></i>');
+        }
+        else
+        {
+            $('#faBtn').html('<i class="fa fa-plus"></i>');
+        }
+    });
+ }); /* end google maps -----------------------*/

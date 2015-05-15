@@ -14,7 +14,7 @@ body {
 }
 
 body {
-    padding-top: 50px;
+    padding-top: 0px;
     /*padding for navbar*/
 }
 
@@ -98,12 +98,16 @@ body {
     font-weight: 300;
 }
 
-#map-canvas {
+/*
+   MAP and TABLE SECTION
+   ========================================================================== */
+
+   #map-canvas {
     width: 100%;
     height: calc(100% - 0);
     position: absolute;
     right: 0px;
-    top: 50px;
+    top: 0px;
     bottom: 0;
     height: 62%;
     overflow: hidden;
@@ -115,11 +119,63 @@ body {
     width: 100%;
     padding-right: 30px;
 }
-/* Small devices (tablets, 768px and up) */
 
-@media (min-width: 768px) {
+.tableBtn-lg {
+  padding: 18px 0;
+  width: 60px;
+}
+
+
+.tableBtn {
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  color: #212121;
+  display: none;
+  font-size: 24px;
+  padding: 12px 0;
+  width: 48px;
+  line-height: 24px;
+  -webkit-box-shadow: 0 3px 10px rgba(0,0,0,.5);
+  box-shadow: 0 3px 10px rgba(0,0,0,.5);
+  -webkit-transition: all .3s cubic-bezier(.4,0,.2,1);
+  transition: all .3s cubic-bezier(.4,0,.2,1);
+  -webkit-transition-property: box-shadow,opacity,-webkit-transform;
+  transition-property: box-shadow,opacity,transform;
+  margin-bottom: 8px;
+  text-decoration: none !important;
+}
+
+ a.tableBtn:hover {
+  color: #212121;
+  -webkit-box-shadow: 0 3px 10px rgba(0,0,0,.5),0 3px 15px rgba(0,0,0,.5);
+  box-shadow: 0 3px 10px rgba(0,0,0,.5),0 3px 15px rgba(0,0,0,.5);
+}
+.tableBtn-red {
+  background-color: #f44336;
+  color: #fff !important;
+}
+
+.fa-plus {
+    display: none;
+}
+
+.collapsed> .fa-plus {
+    display: block;
+}
+.collapsed> .fa-times {
+    display: none;
+}
+/*
+   SCREEN SIZE SECTION
+   ========================================================================== */
+   /* Small devices (tablets, 768px and up) */
+
+   @media (min-width: 768px) {
     #map-canvas {
         /*width:100%;*/
+    }
+    .collapseTable {
+        display: block;
     }
 }
 /* Medium devices (desktops, 992px and up) */
@@ -138,4 +194,11 @@ body {
         position: absolute;
         width: 40%;
     }
+    .tableBtn {
+        display: block;
+    }
+    .collapseTable {
+        display: none;
+    }
+
 }
