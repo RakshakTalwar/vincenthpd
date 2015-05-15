@@ -6,7 +6,7 @@ $(document).ready(function() { /* google maps ----*/
     var data, beatDisplay = $("#beat-name"),
         displayTarget = $("#display-table");
     var displayBeatData = function(event) {
-        beatDisplay.html(event.feature.A.name)
+        beatDisplay.html(event.feature.A.name.toUpperCase())
     }
 
     var initialize = function() {
