@@ -12,15 +12,29 @@
     <!--[if lt IE 9]>
       <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
       <![endif]-->
-    <link href="css/styles.css" rel="stylesheet">
-</head>
+      <link href="css/styles.css" rel="stylesheet">
+  </head>
 
-<body>
+  <body>
     <div id="map-canvas"></div>
     <div class="container-fluid" id="main">
         <div class="row">
             <div class="col-lg-6 col-lg-push-6">
-                <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+                <div id="searchDiv" class="search">
+                <div class="searchInner" style="padding:10px">
+                        <div class="group">
+                            <input id="pac-input" class="controls" type="text" placeholder="" required>
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label><span class="fa fa-search"></span></label>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- <div id="searchDiv" class="search">
+                    <span class="fa fa-search"></span>
+                    <input id="pac-input" class="controls" type="text" placeholder="Search">
+                </div> -->
                 <!--map-canvas will be postioned here-->
             </div>
             <div class="col-lg-6 col-lg-pull-6 tableDiv">
@@ -28,8 +42,8 @@
                     <i class="fa fa-plus"></i>
                     <i class="fa fa-times"></i>
                 </a>
-                <div class="collapse hidden-xs hidden-sm" id="collapseExample">
-                    <div class="panel panel-default">
+                <div class="collapse hidden-xs hidden-sm shadow-z-3" id="collapseExample">
+                    <div class="panel panel-default ">
                         <div class="panel-heading">
                             <h2>Beat: <span class="beat-name"></span></h2>
                         </div>
@@ -85,8 +99,8 @@
                     </div>
                     <!-- /.panel -->
                 </div>
-                <div class="hidden-lg hidden-md" id="collapseExample">
-                    <div class="panel panel-default">
+                <div class="hidden-lg hidden-md">
+                    <div class="panel panel-default secTable">
                         <div class="panel-heading">
                             <h2>Beat: <span class="beat-name"></span></h2>
                         </div>

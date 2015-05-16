@@ -58,10 +58,11 @@ $(document).ready(function() { /* google maps ----*/
         });
 
         /* Setup InputField*/
+        var inputDiv = document.getElementById('searchDiv');
         var input = document.getElementById('pac-input');
 
         // Set InputField inside of Map
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputDiv);
         var searchBox = new google.maps.places.SearchBox(input);
 
         // Put Set Map Listener on InputField

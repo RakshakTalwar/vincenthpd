@@ -72,14 +72,14 @@ body {
   font-family: Roboto;
   font-size: 15px;
   font-weight: 300;
-  margin-left: 12px;
+  margin-left: 0px;
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
-  width: 400px;
+  width: 320px;
 }
 
 #pac-input:focus {
-  border-color: #4d90fe;
+  /*border-color: #4d90fe;*/
 }
 
 .pac-container {
@@ -136,8 +136,6 @@ body {
     padding: 12px 0;
     width: 48px;
     line-height: 24px;
-    -webkit-box-shadow: 0 3px 10px rgba(0,0,0,.5);
-    box-shadow: 0 3px 10px rgba(0,0,0,.5);
     -webkit-transition: all .3s cubic-bezier(.4,0,.2,1);
     transition: all .3s cubic-bezier(.4,0,.2,1);
     -webkit-transition-property: box-shadow,opacity,-webkit-transform;
@@ -161,6 +159,10 @@ a.tableBtn:hover {
     display: none;
 }
 
+.shadow-z-3 {
+    -webkit-box-shadow: 0 3px 10px rgba(0,0,0,.5);
+    box-shadow: 0 3px 10px rgba(0,0,0,.5);
+}
 .collapsed> .fa-plus {
     display: block;
 }
@@ -168,17 +170,135 @@ a.tableBtn:hover {
     display: none;
 }
 
-.header-close {
-  position: absolute;
-  opacity: 0;
-  filter: alpha(opacity=0);
-  -webkit-transform: rotate(-225deg);
-  -ms-transform: rotate(-225deg);
-  transform: rotate(-225deg);
-}
 #collapseExample {
   pointer-events: all;
 }
+.secTable {
+    margin-bottom: 60px;
+}
+/*.search { position: relative; }*/
+/*.search input { text-indent: 30px;}*/
+/*.search .fa-search {
+  position: absolute;
+  top: 24px;
+  left: 25px;
+  font-size: 15px;
+  color: #7f8c8d;
+}*/
+
+
+/*
+   test
+   ========================================================================== */
+
+   /* form starting stylings ------------------------------- */
+.group            {
+  position:relative;
+  margin-bottom:45px;
+}
+input               {
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  width:300px;
+  border:none;
+  border-bottom:1px solid #757575;
+}
+input:focus         { outline:none; }
+
+/* LABEL ======================================= */
+label                {
+  color:#999;
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:10px;
+  top:3px;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+input:focus ~ label, input:valid ~ label        {
+  top:-20px;
+  font-size:14px;
+  color:#5264AE;
+}
+
+/* BOTTOM BARS ================================= */
+.bar {
+    position: relative;
+    display: block;
+    width: 320px;
+    bottom: -1px;
+}
+
+.bar:before, .bar:after     {
+  content:'';
+  height:2px;
+  width:0;
+  bottom:1px;
+  position:absolute;
+  background:#5264AE;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%;
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position:absolute;
+  height:60%;
+  width:100px;
+  top:25%;
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+/* active state */
+input:focus ~ .highlight {
+  -webkit-animation:inputHighlighter 0.3s ease;
+  -moz-animation:inputHighlighter 0.3s ease;
+  animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+    from { background:#5264AE; }
+  to    { width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+    from { background:#5264AE; }
+  to    { width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+    from { background:#5264AE; }
+  to    { width:0; background:transparent; }
+}
+/*
+   endTest
+   ========================================================================== */
+
+
+
+
+
+
+
 /*
    SCREEN SIZE SECTION
    ========================================================================== */
