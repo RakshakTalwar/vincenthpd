@@ -8,7 +8,11 @@ import datetime, math, os, time
 import multiprocessing, sqlite3
 import xlrd
 
-data_dir = 'data'
+data_dir = '.data/'
+
+#set timezone to Houston's timezone
+os.environ['TZ'] = 'America/Chicago'
+time.tzset()
 
 def rows_in_xls(xls_file_path):
     """ Pass it the path for an excel file, returns a list of lists. With each
@@ -41,9 +45,9 @@ def rows_in_xls(xls_file_path):
         return []
 
 def multiprocessing_file_reader(file_names, n_cores):
-    """"""
+    """ """
     def worker(file_names, out_q):
-        """"""
+        """ """
         rows_data = []
 
         for file_name in file_names:
@@ -75,7 +79,11 @@ for root, dirs, filenames in os.walk(data_dir): #iterate over files
         file_names.append(f)
 
 #add all the lists to one main list
-[data.extend(row) for row in multiprocessing_file_reader(file_names, 4)]
+#[data.extend(row) for row in multiprocessing_file_reader(file_names, 4)]
+
+for row in multiprocessing_file_reader(file_names, 4):
+   data.extend(row)
+   print row
 
 db_con = sqlite3.connect('crime_records.db')
 
@@ -96,4 +104,53 @@ for crime in data:
     except:
         pass
 
-db_con.commit()
+db_con.commit() #save to database
+db_con.close() #close connection
+
+db_con = sqlite3.connect('crime_records.db')
+cur = db_con.cursor()
+
+#create a list of all cTimes of every day from the beginning of the dataset to the end, these include everyday in between including the ones which haven't been given
+all_cTimes = []
+earliest_time = []
+latest_time = []
+#create sets of all possible types of violent crimes and beats
+crime_types = set()
+beat_types = set()
+
+#grab all of the data to find the used cTimes, the first cTime, the last cTime, and all of the possible types of violent crimes and beats
+cur.execute('SELECT cTime, OffenseType, Beat FROM HPDCrimes ORDER BY cTime ASC')
+
+for ctr, crime in enumerate(cur.fetchall()):
+    if ctr == 0:
+       earliest_time = crime[0]
+       print "{} {}".format(earliest_time, type(earliest_time))
+    else:
+        latest_time = crime[0]
+    crime_types.add(crime[1])
+    beat_types.add(crime[2])
+
+check_ctr = 0
+for e in xrange(int(earliest_time), int(latest_time), 86400):
+    for crime_type in crime_types:
+        for beat_type in beat_types:
+            for crime in data:
+                if crime[0] != e and crime[2] != crime_type and crime[3] != beat_type:
+                    check_ctr += 1
+                    if check_ctr >= (len(data) - 1):
+                        cur.execute('INSERT INTO HPDCrimes VALUES(?, ?, ?, ?, ?, ?, ?, ?)', (e, crime_type, beat_type, '-', '-', '-', '-', 0))
+                        check_ctr = 0
+                    else:
+                        check_ctr = 0
+                        continue
+
+db_con.commit() #save to database
+
+
+
+
+
+
+
+
+
